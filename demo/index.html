@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Identicon</title>
+
+    <style type="text/css">
+        .icon-wrapper {
+            background-color: #1b8da0;
+            display: inline-flex;
+        }
+
+        .stellar-identicon {
+            display: inline-block;
+            margin: 15px;
+            padding: 17px;
+            background: #ffffff;
+            border-radius: 100%;
+            width: 80px;
+            height: 80px;
+        }
+
+        .stellar-identicon canvas,
+        .stellar-identicon img {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        button {
+            height: 40px;
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+
+    <div>
+        <button id="random-address" type="button">Random</button>
+    </div>
+
+    <div class="icon-wrapper">
+        <div id="generated-canvas" class="stellar-identicon">
+        </div>
+
+        <div class="stellar-identicon">
+            <canvas id="existed-canvas" height="210px" width="210px"></canvas>
+        </div>
+
+        <div class="stellar-identicon">
+            <img id="image" src="">
+        </div>
+    </div>
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/stellar-sdk/0.8.2/stellar-sdk.js"
+        integrity="sha256-DT+CIy1kuyZqFrH+TenEFppT5Vu/GJc8K7XX+lE6/1U= sha384-n/m29elbtFyTkuPHYSa9oFTmPTYMjdW9I7NyYJLVxEkoJlaC3RqmDTJYVJH8RYqO sha512-Qlp70K2Jivs0adOYBx8eYFzrRZFqBg9Uhg01nimbl2MMNy6gYWSpVhdNrXShrKdrh/2e+Yt/YSbfPMVAR+oIOg=="
+        crossorigin="anonymous"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/randomcolor/0.5.4/randomColor.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jshashes/1.0.7/hashes.js"></script>
+    <script type="text/javascript" src="../stellarIdenticonGenerator.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
