@@ -6,9 +6,15 @@
     <title>Identicon</title>
 
     <style type="text/css">
+        body {
+            max-width: 550px;
+        }
+
         .icon-wrapper {
+            padding: 20px;
             background-color: #1b8da0;
-            display: inline-flex;
+            display: flex;
+            justify-content: space-around;
         }
 
         .stellar-identicon {
@@ -28,27 +34,88 @@
         }
 
         button {
-            height: 40px;
+            height: 38px;
             width: 100px;
+            border-width: 1px;
+        }
+
+        .stellar-address-input {
+            width: 450px;
+        }
+
+        .form-group {
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+        }
+
+        .form-group input {
+            height: 32px;
+            padding: 2px;
+            border: solid 1px gray;
+        }
+
+        form {
+            display: flex;
+            align-items: flex-end;
+            margin-bottom: 15px;
+        }
+
+        .example {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .example .description {
+            background-color: #FFFFFF;
+            padding: 7px;
+        }
+
+        .invalid-feedback {
+            color: red;
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            font-size: 14px;
+
+            display: none;
+        }
+
+        .has-error .invalid-feedback {
+            display: block;
         }
     </style>
 </head>
 <body>
 
-    <div>
-        <button id="random-address" type="button">Random</button>
-    </div>
+    <form>
+        <div class="form-group">
+            <label for="stellar_address">Stellar Address</label>
+            <input type="text" class="stellar-address-input" name="stellar_address" maxlength="56">
+            <span class="invalid-feedback">Invalid stellar address</span>
+        </div>
+        <div class="form-group">
+            <button id="random-address" type="button">Generate Random</button>
+        </div>
+    </form>
 
     <div class="icon-wrapper">
-        <div id="generated-canvas" class="stellar-identicon">
+        <div class="example">
+            <div class="stellar-identicon">
+                <canvas id="existing-canvas" height="210px" width="210px"></canvas>
+            </div>
+            <div class="description">Identicon generated locally with JS</div>
         </div>
 
-        <div class="stellar-identicon">
-            <canvas id="existed-canvas" height="210px" width="210px"></canvas>
-        </div>
-
-        <div class="stellar-identicon">
-            <img id="image" src="">
+        <div class="example">
+            <div class="stellar-identicon">
+                <img id="image" src="">
+            </div>
+            <div class="description">Identicon loaded from id.lobstr.co</div>
         </div>
     </div>
 
