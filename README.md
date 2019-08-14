@@ -30,4 +30,4 @@ https://id.lobstr.co/GBIDGDSVQXAHGZNOETS7ADUMWCDSQJU4R53EZRK6ONP3BA42UJL5PAHR.pn
 This web service (id.lobstr.co) uses [stellar-identicon-py](https://github.com/Lobstrco/stellar-identicon-py) and saves the resulting identicons using Cloudfront. 
 So each identicon is generated only once, then saved and served fast through AWS Cloudfront CDN for fast delivery and high availability.
 
-Identicons are served as 200x200 square images in PNG format, <1KB in size, which should work for most usecases.
+Identicons are served as 210x210 square images in PNG format, <1KB in size, which should work for most usecases.
