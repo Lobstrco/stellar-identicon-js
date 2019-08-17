@@ -16,6 +16,10 @@ With the default settings, both will produce the same identicon image for any St
 
 Just open the `demo/index.html` in the browser to see the usage example.
 
+The demo shows how to use the library to generate identicon and confirms that it's compatible with the Python implementation of the generator:
+
+![image](https://user-images.githubusercontent.com/984711/63211745-236eba80-c104-11e9-8eb5-fd7d363ac37b.png)
+
 
  ## Web API
 
