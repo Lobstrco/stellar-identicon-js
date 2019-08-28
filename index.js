@@ -1,15 +1,44 @@
 const DEFAULT_SIZE = 7;
+const keyStr = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
 
-function publicKeyToBytes(public_key) {
-    var MD5 = new Hashes.MD5;
-    var md5_hash = MD5.raw(public_key);
+function decodeBase32(input) {
+    var charmap = {};
+    keyStr.split('').map(function (c, i) {
+        charmap[c] = i;
+    });
+    var buf = [];
+    var shift = 8;
+    var carry = 0;
 
-    var bytes = [];
-    for (var i = 0; i < md5_hash.length; i ++) {
-        bytes.push(md5_hash[i].charCodeAt());
+    input.toUpperCase().split('').forEach(function (char) {
+        var symbol = charmap[char] & 0xff;
+
+        shift -= 5;
+        if (shift > 0) {
+          carry |= symbol << shift;
+        } else if (shift < 0) {
+          buf.push(carry | (symbol >> -shift));
+          shift += 8;
+          carry = (symbol << shift) & 0xff;
+        } else {
+          buf.push(carry | symbol);
+          shift = 8;
+          carry = 0;
+        }
+    });
+
+    if (shift !== 8 && carry !== 0) {
+        buf.push(carry);
+        shift = 8;
+        carry = 0;
     }
 
-    return bytes;
+    return buf;
+}
+
+function publicKeyToBytes(public_key) {
+    const decoded = decodeBase32(public_key);
+    return decoded.slice(2, 16);  //take 16 meaningful bytes from raw pub key
 }
 
 function generateEmptyMatrix(width, height) {
@@ -55,7 +84,7 @@ function generateMatrix(bytes, symmetry) {
 function drawMatrix(canvas, matrix) {
     const context = canvas.getContext('2d');
     context.clearRect(0, 0, canvas.width, canvas.height);
-    
+
     const cellSize = canvas.width / matrix.length;
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
@@ -103,7 +132,7 @@ function setFillStyle(canvas, byte) {
     ctx.fillStyle = "rgb(" + color.r + ", " + color.g + ", " + color.b + ")";
 }
 
-function drawIdenticon (canvas, stellarAddress) {
+function drawIdenticon(canvas, stellarAddress) {
     var bytes = publicKeyToBytes(stellarAddress);
     var matrix = generateMatrix(bytes, true);
 
@@ -111,12 +140,23 @@ function drawIdenticon (canvas, stellarAddress) {
     drawMatrix(canvas, matrix);
 }
 
-function createStellarIdenticon(stellarAddress) {
+/**
+ * Function to create canvas with logo generated from stellar address
+ *
+ * @param {string} stellarAddress - A valid stellar address
+ * @param {object} options - Object with options for generated canvas
+ * @return {canvas} generated logo
+ */
+function createStellarIdenticon(stellarAddress, options = {}) {
+    options.width = options.width || 210;
+    options.height = options.height || 210;
     var canvas = document.createElement('canvas');
-    canvas.width = 210;
-    canvas.height = 210;
+    canvas.width = options.width;
+    canvas.height = options.height;
 
     drawIdenticon(canvas, stellarAddress);
 
     return canvas;
 }
+
+module.exports = createStellarIdenticon
