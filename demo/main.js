@@ -1,3 +1,5 @@
+const createStellarIdenticon = require('../index');
+
 var randomAddressButton = document.getElementById('random-address'),
     stellarAddressInput = document.getElementsByName('stellar_address')[0];
 
@@ -7,7 +9,10 @@ function updateIcons (address) {
     var image = document.getElementById('image');
     image.src = "https://id.lobstr.co/" + address + ".png";
 
-    drawIdenticon(document.getElementById('existing-canvas'), address);
+    var existingCanvas = document.getElementById('existing-canvas');
+    var generatedCanvas = createStellarIdenticon(address);
+    generatedCanvas.id = 'existing-canvas';
+    existingCanvas.parentNode.replaceChild(generatedCanvas, existingCanvas);
 }
 
 randomAddressButton.onclick = function () {
