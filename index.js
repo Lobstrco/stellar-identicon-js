@@ -1,5 +1,5 @@
 const DEFAULT_SIZE = 7;
-const keyStr = '0123456789ABCDEFGHJKMNPQRSTVWXYZ';
+const keyStr = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ234567';
 
 function decodeBase32(input) {
     var charmap = {};
