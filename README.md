@@ -11,10 +11,28 @@ See also the Python version of the same generator here: https://github.com/Lobst
 
 With the default settings, both will produce the same identicon image for any Stellar account address.
 
-
 ## Usage
 
-Just open the `demo/index.html` in the browser to see the usage example.
+```
+import createStellarIdenticon from 'stellar-identicon-js';
+
+const canvas = createStellarIdenticon('GBIDGDSVQXAHGZNOETS7ADUMWCDSQJU4R53EZRK6ONP3BA42UJL5PAHR');
+const renderedIcon = canvas.toDataURL() // create  data URI containing a generated icon in PNG format
+
+```
+
+## Demo
+
+- Install npm dependecies
+```
+npm install
+```
+- Build library
+```
+npm run build
+```
+
+And open the `demo/index.html` in the browser to see the usage example.
 
 The demo shows how to use the library to generate identicon and confirms that it's compatible with the Python implementation of the generator:
 
@@ -31,7 +49,7 @@ This is how you can get the identicon:
 https://id.lobstr.co/GBIDGDSVQXAHGZNOETS7ADUMWCDSQJU4R53EZRK6ONP3BA42UJL5PAHR.png
 
 
-This web service (id.lobstr.co) uses [stellar-identicon-py](https://github.com/Lobstrco/stellar-identicon-py) and saves the resulting identicons using Cloudfront. 
+This web service (id.lobstr.co) uses [stellar-identicon-py](https://github.com/Lobstrco/stellar-identicon-py) and saves the resulting identicons using Cloudfront.
 So each identicon is generated only once, then saved and served fast through AWS Cloudfront CDN for fast delivery and high availability.
 
 Identicons are served as 210x210 square images in PNG format, <1KB in size, which should work for most usecases.
